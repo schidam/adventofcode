@@ -5,9 +5,8 @@ int
 main(int argc, char * argv[])
 {
     Puzzle p;
-    std::string fn = "2/2.txt";
-    // fn = "2/ex.txt";
+    std::string fn = "3/3.txt";
+    // fn = "3/ex.txt";
     std::cout << "Result: " << p.solve(fn) << std::endl;
-    // p.print_data();
     return 0;
 }
