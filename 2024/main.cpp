@@ -1,14 +1,13 @@
 #include <iostream>
-#include "1\1.h"
+#include "2\2.h"
 
 int 
 main(int argc, char * argv[])
 {
     Puzzle p;
-    std::string fn = "1/1a.txt";
-    // std::string fn = "1/ex.txt";
-    p.load_data(fn);
-    std::cout << "Result: " << p.solveB() << std::endl;
+    std::string fn = "2/2.txt";
+    // fn = "2/ex.txt";
+    std::cout << "Result: " << p.solve(fn) << std::endl;
     // p.print_data();
     return 0;
 }
