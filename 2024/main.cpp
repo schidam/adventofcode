@@ -1,12 +1,12 @@
 #include <iostream>
-#include "5\5.h"
+#include "7\7.h"
 
 int 
 main(int argc, char * argv[])
 {
     Puzzle p;
-    std::string fn = "5/5.txt";
-    // fn = "5/ex.txt";
-    std::cout << "Result: " << p.solveB(fn) << std::endl;
+    std::string fn = "7/7.txt";
+    // fn = "7/ex.txt";
+    std::cout << "Result: " << p.solveA(fn) << std::endl;
     return 0;
 }

@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.24.1)
+
+project(AOC)
+
+file(GLOB_RECURSE sources 2024/*/*.cpp 2024/*/*.h 2024/*.cpp 2024/*.h)
+
+# add the data to the target, so it becomes visible in some IDE
+add_executable(example ${sources})
+
+# just for example add some compiler flags
+target_compile_options(example PUBLIC -std=c++23 -Wall -Wfloat-conversion -target x86_64-pc-windows-gnu)
