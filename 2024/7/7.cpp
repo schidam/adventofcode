@@ -3,6 +3,7 @@
 #include <fstream>
 #include <cmath>
 #include <cstdlib>
+#include <stdexcept>
 #include <vector>
 #include <sstream>
 #include <cstring>
@@ -66,13 +67,43 @@ Puzzle::solveA(std::string fn)
 
         if(correct) {
 
-            if(debug) std::cout << "This line matched with result " << p.first <<std::endl;
+            std::cout << p.first <<std::endl;
+            // if(debug) std::cout << "This line matched with result " << p.first <<std::endl;
             result += p.first;
         }
         
     }
     return result;
 }
+#include <cmath>
+uint cat(uint b, uint a) {
+    std::string strA = std::to_string(a);
+    std::string strB = std::to_string(b);
+    bool debug = true;
+    debug = false;
+
+    int num_digits = 0;
+    if(debug) std::cout << "CAT ON " << b << " and " << a << std::endl;
+    uint num = a;
+    while (num > 0) {
+        num = num / 10;
+        num_digits++;
+    }
+    uint dividor = (uint)pow(10,num_digits);
+    if(debug) std::cout << "   SUB_DATA " << (b-a) << " num_digits is " << num_digits << " DIVIDOR " << dividor << std::endl;
+
+    // Ret b%size of a - a == 0
+    if ( ((b-a)%(dividor) == 0) ) {
+        if(debug) std::cout << "    RETURNING " << (b-a)/(num_digits*10) << " and num_digits is" << num_digits << std::endl;
+        // splittable
+        return (b-a)/(dividor);
+    } else {
+        if(debug) std::cout << "    FAILED RETURNING 0" << std::endl;
+        return 0;
+    }
+
+}
+
 
 bool Puzzle::calculate(uint result, std::vector<uint> vec, int level) {
     bool ret = false;
@@ -103,9 +134,29 @@ bool Puzzle::calculate(uint result, std::vector<uint> vec, int level) {
             ret = (result == vec.back()) ? true : false;
         }          
     }
+    if(!ret) {
+        //if not divisible, try concatenante (split)
+        if(vec.size() > 1) {
+            if(debug) std::cout << std::string( level*4, ' ' ) <<  "recursing after CAT (JOIN)" << std::endl;
+            std::vector<uint> vec1(vec);
+            vec1.erase(vec1.end());
+            try {
+                ret = calculate(cat(result,vec.back()), vec1,++level);    
+            }
+            catch (const _exception& e) {
+                ret = false;
+            }
+            
+        } else {
+            if(debug) std::cout << std::string( level*4, ' ' ) <<  "size of vec is == 1 in ADD" << std::endl; 
+            ret = (result == vec.back()) ? true : false;
+        }          
+    }
+
     // last element, if true - then check equality
     return ret;
 }
+
 
 
 int
